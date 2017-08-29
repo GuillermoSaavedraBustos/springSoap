@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd          http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+    <!-- Proyecto apache camel que permite realizar un proxy entre servicios del tipo SOAP -->
+    <camelContext id="s03-proxy" xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="placeholder" location="classpath:application.properties"/>
+        <onException>
+            <exception>java.lang.Exception</exception>
+            <redeliveryPolicy
+                maximumRedeliveries="{{camel.timeout.max-delivery}}" redeliveryDelay="{{camel.timeout.redelivery-delay}}"/>
+        </onException>
+        <intercept>
+            <transform>
+                <simple>{"request":{"headers"{"http":"sdasdasd","http":"sdasdasd","http":"sdasdasd","http":"sdasdasd",}}}</simple>
+            </transform>
+            <log message="mensaje: ${body}"/>
+        </intercept>
+        <!-- Ruta camel que expone un servicio SOAP basado en una publicación del mismo tipo-->
+        <route id="_route1" streamCache="true">
+            <!-- TODO: queda pendiente cambiar el namespace y probar, ver readme.pm-->
+            <from id="_from1" uri="cxf:http://0.0.0.0:8888/service.asmx?wsdlURL=classpath:wsdl/baseExample.wsdl&amp;serviceName={http://www.webserviceX.NET}GlobalWeather&amp;portName={http://www.webserviceX.NET}GlobalWeatherSoap&amp;dataFormat=MESSAGE"/>
+            <to id="_to1" uri="cxf:http://www.webservicex.net/globalweather.asmx?dataFormat=MESSAGE"/>
+            <log id="_log1" message="pasando por servicio proxy"/>
+        </route>
+    </camelContext>
+</beans>
