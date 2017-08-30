@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ImportResource({"classpath:/spring-camel-context.xml"})
 public class SpringBootSoapProxyApplication {
 	
-	@RequestMapping("/started")
+	@RequestMapping("/inicia")
     @ResponseBody
     String salidaHe() {
-		return "servicio funcionando";
+		return "STARTED";
     }    
     
-    @RequestMapping("/health")
+    @RequestMapping("/salud")
     @ResponseBody
     String salidaLi() {
             return "UP";
