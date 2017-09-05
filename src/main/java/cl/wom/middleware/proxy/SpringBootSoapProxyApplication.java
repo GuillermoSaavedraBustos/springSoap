@@ -23,7 +23,7 @@ public class SpringBootSoapProxyApplication {
     }
 
 	public static void main(String[] args) {
-		System.out.println("INICIANDO APLICACION");
+		System.out.println("INICIANDO APLICACION PRUEBA");
 		SpringApplication.run(SpringBootSoapProxyApplication.class, args);
 	}
 }
