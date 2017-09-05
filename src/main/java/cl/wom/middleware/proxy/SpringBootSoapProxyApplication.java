@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 @ImportResource({"classpath:/spring-camel-context.xml"})
 public class SpringBootSoapProxyApplication {
-	
+
 	@RequestMapping("/inicia")
     @ResponseBody
     String salidaHe() {
-		return "STARTED";
-    }    
-    
+			return "STARTED";
+    }
+
     @RequestMapping("/salud")
     @ResponseBody
     String salidaLi() {
-            return "UP";
+			return "UP";
     }
 
 	public static void main(String[] args) {
